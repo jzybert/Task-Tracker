@@ -4,8 +4,8 @@ defmodule TaskTracker.Users.User do
 
 
   schema "users" do
-    field :name, :string
-    field :tasks, {:array, :string}
+    field :email, :string
+    field :admin, :boolean, default: false, null: false
 
     timestamps()
   end
@@ -13,7 +13,7 @@ defmodule TaskTracker.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :tasks])
-    |> validate_required([:name, :tasks])
+    |> cast(attrs, [:email, :admin])
+    |> validate_required([:email, :admin])
   end
 end

@@ -4,12 +4,12 @@
 
   <li>
     <strong>Name:</strong>
-    <%= @user.name %>
+    <%= @user.email %>
   </li>
 
   <li>
-    <strong>Tasks:</strong>
-    <%= @user.tasks %>
+    <strong>Admin?:</strong>
+    <%= @user.admin %>
   </li>
 
 </ul>

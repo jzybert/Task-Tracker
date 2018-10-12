@@ -6,18 +6,12 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :name %>
-    <%= text_input f, :name %>
-    <%= error_tag f, :name %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :tasks %>
-    <%= multiple_select f, :tasks, ["Option 1": "option1", "Option 2": "option2"] %>
-    <%= error_tag f, :tasks %>
+    <%= label f, :email %>
+    <%= text_input f, :email, class: "form-control" %>
+    <%= error_tag f, :email %>
   </div>
 
   <div>
-    <%= submit "Save" %>
+    <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>

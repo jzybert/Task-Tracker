@@ -10,10 +10,10 @@
   <body>
     <div class="container">
       <nav class="navbar navbar-expand-sm navbar-light bg-white">
-        <div class="col-9">
+        <div class="col-4">
           <a class="navbar-brand" href="/">Task Tracker</a>
         </div>
-        <div class="col-3">
+        <div class="col-4">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="/">Home</a>
@@ -25,6 +25,20 @@
               <a class="nav-link" href="/tasks">Tasks</a>
             </li>
           </ul>
+        </div>
+        <div class="col-4">
+            <%= if @current_user do %>
+              <p class="my-3">
+                <%= @current_user.email %> |
+                <%= link("Logout", to: Routes.session_path(@conn, :delete),
+                  method: :delete) %>
+              </p>
+            <% else %>
+              <%= form_for @conn, Routes.session_path(@conn, :create), [class: "form-inline"], fn f -> %>
+                <%= text_input f, :email, class: "form-control" %>
+                <%= submit "Login", class: "btn btn-secondary" %>
+              <% end %>
+            <% end %>
         </div>
       </nav>
 
