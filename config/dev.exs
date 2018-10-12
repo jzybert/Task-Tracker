@@ -29,16 +29,6 @@ config :task_tracker, TaskTrackerWeb.Endpoint,
 # If desired, both `http:` and `https:` keys can be
 # configured to run both http and https servers on
 # different ports.
-get_secret = fn name ->
-  base = Path.extend("~/.config/task_tracker")
-  File.mkdir_p!(base)
-  path = Path.join(base, name)
-  unless File.exists?(path) do
-    secret = Base.encode16(:crypto.strong_rand_bytes(32))
-    File.write!(path, secret)
-  end
-  String.trim(File.read!(path))
-end
 
 # Watch static and templates for browser reloading.
 config :task_tracker, TaskTrackerWeb.Endpoint,
@@ -60,6 +50,17 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+get_secret = fn name ->
+  base = Path.expand("~/.config/task_tracker")
+  File.mkdir_p!(base)
+  path = Path.join(base, name)
+  unless File.exists?(path) do
+    secret = Base.encode16(:crypto.strong_rand_bytes(32))
+    File.write!(path, secret)
+  end
+  String.trim(File.read!(path))
+end
 
 # Configure your database
 config :task_tracker, TaskTracker.Repo,

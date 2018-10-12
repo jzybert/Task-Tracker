@@ -79,7 +79,7 @@ config :logger, level: :info
 # kept out of version control and might be hard to recover
 # or recreate for your teammates (or yourself later on).
 get_secret = fn name ->
-  base = Path.extend("~/.config/task_tracker")
+  base = Path.expand("~/.config/task_tracker")
   File.mkdir_p!(base)
   path = Path.join(base, name)
   unless File.exists?(path) do
