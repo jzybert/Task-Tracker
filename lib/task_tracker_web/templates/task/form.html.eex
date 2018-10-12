@@ -5,21 +5,35 @@
     </div>
   <% end %>
 
-  <%= label f, :title %>
-  <%= text_input f, :title %>
-  <%= error_tag f, :title %>
+  <div class="form-group">
+    <%= label f, :assigned_user %>
+    <%= text_input f, :assigned_user %>
+    <%= error_tag f, :assigned_user %>
+  </div>
 
-  <%= label f, :desc %>
-  <%= textarea f, :desc %>
-  <%= error_tag f, :desc %>
+  <div class="form-group">
+    <%= label f, :title %>
+    <%= text_input f, :title %>
+    <%= error_tag f, :title %>
+  </div>
 
-  <%= label f, :time_worked %>
-  <%= time_select f, :time_worked %>
-  <%= error_tag f, :time_worked %>
+  <div class="form-group">
+    <%= label f, :desc %>
+    <%= textarea f, :desc %>
+    <%= error_tag f, :desc %>
+  </div>
 
-  <%= label f, :is_complete %>
-  <%= checkbox f, :is_complete %>
-  <%= error_tag f, :is_complete %>
+  <div class="form-group">
+    <%= label f, :time_worked %>
+    <%= time_select f, :time_worked %>
+    <%= error_tag f, :time_worked %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :is_complete %>
+    <%= checkbox f, :is_complete %>
+    <%= error_tag f, :is_complete %>
+  </div>
 
   <div>
     <%= submit "Save" %>
