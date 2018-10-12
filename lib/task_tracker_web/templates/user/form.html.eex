@@ -5,13 +5,17 @@
     </div>
   <% end %>
 
-  <%= label f, :name %>
-  <%= text_input f, :name %>
-  <%= error_tag f, :name %>
+  <div class="form-group">
+    <%= label f, :name %>
+    <%= text_input f, :name %>
+    <%= error_tag f, :name %>
+  </div>
 
-  <%= label f, :tasks %>
-  <%= multiple_select f, :tasks, ["Option 1": "option1", "Option 2": "option2"] %>
-  <%= error_tag f, :tasks %>
+  <div class="form-group">
+    <%= label f, :tasks %>
+    <%= multiple_select f, :tasks, ["Option 1": "option1", "Option 2": "option2"] %>
+    <%= error_tag f, :tasks %>
+  </div>
 
   <div>
     <%= submit "Save" %>
