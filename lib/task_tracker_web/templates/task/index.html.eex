@@ -1,35 +1,28 @@
-<h1>Listing Tasks</h1>
+<div class="row">
+    <div class="col-8">
+      <h1>All Tasks</h1>
+    </div>
+    <div class="col-2">
+      <%= if @current_user do %>
+        <span><%= link "New Task", to: Routes.task_path(@conn, :new), class: "btn btn-primary" %></span>
+      <% end %>
+    </div>
+</div>
 
-<table class="table table-striped">
-  <thead class="thead-light">
-    <tr>
-      <th>Title</th>
-      <th>Time Worked</th>
-      <th>Complete?</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="row">
 <%= for task <- @tasks do %>
-    <tr>
-      <td><%= link task.title, to: Routes.task_path(@conn, :show, task) %></td>
-      <td><%= task.time_worked %></td>
-      <td><%= task.is_complete %></td>
-
-      <td>
-        <%= if @current_user do %>
-          <%= link "Edit", to: Routes.task_path(@conn, :edit, task),
-              class: "btn btn-info btn-sm" %>
-          <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"],
-              class: "btn btn-danger btn-sm" %>
+    <div class="card col-5" style="margin: 5px">
+      <div class="card-body">
+        <h5 class="card-title"><%= link task.title, to: Routes.task_path(@conn, :show, task) %></h5>
+        <%= if task.is_complete do %>
+          <h6 class="card-subtitle mb-2 text-muted">Complete</h6>
+        <% else %>
+          <h6 class="card-subtitle mb-2 text-muted">Not Complete</h6>
         <% end %>
-      </td>
-    </tr>
+        <p class="card-text"><%= task.desc %></p>
+        <%= link "Edit", to: Routes.task_path(@conn, :edit, task), class: "btn btn-link" %>
+        <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-link" %>
+      </div>
+    </div>
 <% end %>
-  </tbody>
-</table>
-
-<%= if @current_user do %>
-  <span><%= link "New Task", to: Routes.task_path(@conn, :new), class: "btn btn-primary" %></span>
-<% end %>
+</div>
