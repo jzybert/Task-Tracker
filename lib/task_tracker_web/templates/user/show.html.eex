@@ -1,18 +1,31 @@
-<h1>Show User</h1>
+<h1>User: <%= @user.email %></h1>
 
 <ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @user.email %>
-  </li>
-
   <li>
     <strong>Admin?:</strong>
     <%= @user.admin %>
   </li>
-
 </ul>
+
+<h2>This user's tasks:</h2>
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Title</th>
+      <th>Time Worked</th>
+      <th>Complete?</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for assigned_task <- @tasks do %>
+    <tr>
+      <td><%= link assigned_task.task.title, to: Routes.task_path(@conn, :show, assigned_task.task) %></td>
+      <td><%= assigned_task.task.time_worked %></td>
+      <td><%= assigned_task.task.is_complete %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
 
 <% if @current_user && @current_user.admin do %>
   <span><%= link "Edit", to: Routes.user_path(@conn, :edit, @user), class: "btn btn-secondary" %></span>
