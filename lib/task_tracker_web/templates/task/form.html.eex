@@ -17,9 +17,13 @@
     <%= error_tag f, :desc %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :time_worked %>
-    <%= time_select f, :time_worked, minute: [options: [0, 15, 30, 45]] %>
+  <div class="form-group disabled">
+    <%= label f, "Time worked: " %>
+    <%= if @is_task_assigned_to_user do %>
+      <%= time_select f, :time_worked, options: [minute: [options: [0, 15, 30, 45]]] %>
+    <% else %>
+      Cannot edit a task's time if you're not assigned to it
+    <% end %>
     <%= error_tag f, :time_worked %>
   </div>
 

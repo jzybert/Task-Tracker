@@ -40,8 +40,11 @@ defmodule TaskTrackerWeb.TaskController do
 
   def edit(conn, %{"id" => id}) do
     task = Tasks.get_task!(id)
+    user_id = get_session(conn, :user_id)
+    assigned_task_ids = Enum.map AssignedTasks.list_assigned_tasks_for_user(user_id), fn(t) -> t.task.id end
+    is_task_assigned_to_user = task.id in assigned_task_ids
     changeset = Tasks.change_task(task)
-    render(conn, "edit.html", task: task, changeset: changeset)
+    render(conn, "edit.html", task: task, changeset: changeset, is_task_assigned_to_user: is_task_assigned_to_user)
   end
 
   def update(conn, %{"id" => id, "task" => task_params}) do

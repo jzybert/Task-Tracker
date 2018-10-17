@@ -41,6 +41,7 @@
   </div>
 <% end %>
 
-
-<span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task), class: "btn btn-info" %></span>
+<%= if @current_user do %>
+  <span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task), class: "btn btn-info" %></span>
+<% end %>
 <span><%= link "Go Back", to: Routes.task_path(@conn, :index), class: "btn btn-secondary" %></span>

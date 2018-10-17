@@ -18,14 +18,18 @@
       <td><%= task.is_complete %></td>
 
       <td>
-        <%= link "Edit", to: Routes.task_path(@conn, :edit, task),
-            class: "btn btn-info btn-sm" %>
-        <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"],
-            class: "btn btn-danger btn-sm" %>
+        <%= if @current_user do %>
+          <%= link "Edit", to: Routes.task_path(@conn, :edit, task),
+              class: "btn btn-info btn-sm" %>
+          <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"],
+              class: "btn btn-danger btn-sm" %>
+        <% end %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Task", to: Routes.task_path(@conn, :new), class: "btn btn-primary" %></span>
+<%= if @current_user do %>
+  <span><%= link "New Task", to: Routes.task_path(@conn, :new), class: "btn btn-primary" %></span>
+<% end %>
