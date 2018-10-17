@@ -1,13 +1,10 @@
-<h1>User: <%= @user.email %></h1>
+<%= if @user.admin do %>
+  <h3>Admin: <%= @user.email %></h3>
+<% else %>
+  <h3>Non-Admin: <%= @user.email %></h3>
+<% end %>
 
-<ul>
-  <li>
-    <strong>Admin?:</strong>
-    <%= @user.admin %>
-  </li>
-</ul>
-
-<h2>This user's tasks:</h2>
+<h3>This user's tasks:</h3>
 <table class="table table-striped">
   <thead class="thead-light">
     <tr>

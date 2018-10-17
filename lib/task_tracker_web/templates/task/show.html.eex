@@ -42,5 +42,5 @@
 <% end %>
 
 
-<span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task), class: "btn btn-secondary" %></span>
+<span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task), class: "btn btn-info" %></span>
 <span><%= link "Go Back", to: Routes.task_path(@conn, :index), class: "btn btn-secondary" %></span>

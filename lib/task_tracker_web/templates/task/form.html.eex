@@ -19,7 +19,7 @@
 
   <div class="form-group">
     <%= label f, :time_worked %>
-    <%= time_select f, :time_worked, class: "form-control" %>
+    <%= time_select f, :time_worked, minute: [options: [0, 15, 30, 45]] %>
     <%= error_tag f, :time_worked %>
   </div>
 

@@ -10,10 +10,10 @@
   <body>
     <div class="container">
       <nav class="navbar navbar-expand-sm navbar-light bg-white">
-        <div class="col-4">
+        <div class="col-5">
           <a class="navbar-brand" href="/">Task Tracker</a>
         </div>
-        <div class="col-4">
+        <div class="col-2">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="/">Home</a>
@@ -26,7 +26,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-4">
+        <div class="col-5">
             <%= if @current_user do %>
               <p class="my-3">
                 <%= link(@current_user.email, to: Routes.user_path(@conn, :show, @current_user.id)) %> |
@@ -36,7 +36,8 @@
             <% else %>
               <%= form_for @conn, Routes.session_path(@conn, :create), [class: "form-inline"], fn f -> %>
                 <%= text_input f, :email, class: "form-control" %>
-                <%= submit "Login", class: "btn btn-link" %>
+                <%= submit "Login", class: "btn btn-link" %> |
+                <%= link "Register", to: Routes.user_path(@conn, :new), class: "btn btn-link" %>
               <% end %>
             <% end %>
         </div>
@@ -56,16 +57,14 @@
       </div>
 
       <div class="row">
-        <div class="col-7">
+        <div class="col-6">
           <%= render @view_module, @view_template, assigns %>
         </div>
 
-        <div class="col-5">
+        <div class="col-6">
           <%= if @current_user do %>
             <%= render TaskTrackerWeb.AssignedTaskView, "index.html",
             Map.put(assigns, :assigned_tasks, @current_user.assigned_tasks) %>
-          <% else %>
-            <p><%= link "Register", to: Routes.user_path(@conn, :new) %></p>
           <% end %>
         </div>
       </div>

@@ -23,7 +23,7 @@ defmodule TaskTrackerWeb.AssignedTaskController do
     case AssignedTasks.create_assigned_task(assigned_task_params_with_id) do
       {:ok, assigned_task} ->
         conn
-        |> put_flash(:info, "Assigned task created successfully.")
+        |> put_flash(:info, "Task successfully assigned.")
         |> redirect(to: Routes.task_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->

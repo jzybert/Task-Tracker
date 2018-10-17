@@ -4,7 +4,6 @@
   <thead class="thead-light">
     <tr>
       <th>Title</th>
-      <th>Description</th>
       <th>Time Worked</th>
       <th>Complete?</th>
 
@@ -15,15 +14,14 @@
 <%= for task <- @tasks do %>
     <tr>
       <td><%= link task.title, to: Routes.task_path(@conn, :show, task) %></td>
-      <td><%= task.desc %></td>
       <td><%= task.time_worked %></td>
       <td><%= task.is_complete %></td>
 
       <td>
         <%= link "Edit", to: Routes.task_path(@conn, :edit, task),
-            class: "btn btn-info" %>
+            class: "btn btn-info btn-sm" %>
         <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"],
-            class: "btn btn-danger" %>
+            class: "btn btn-danger btn-sm" %>
       </td>
     </tr>
 <% end %>

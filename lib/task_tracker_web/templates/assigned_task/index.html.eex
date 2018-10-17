@@ -17,7 +17,7 @@
       <td><%= assigned_task.task.is_complete %></td>
       <td>
         <%= link "Unassign", to: Routes.assigned_task_path(@conn, :delete, assigned_task),
-            method: :delete, data: [confirm: "Are you sure you want to unassign?"], class: "btn btn-danger" %>
+            method: :delete, data: [confirm: "Are you sure you want to unassign?"], class: "btn btn-danger btn-sm" %>
       </td>
     </tr>
 <% end %>
