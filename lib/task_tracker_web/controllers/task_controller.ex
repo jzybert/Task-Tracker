@@ -4,6 +4,7 @@ defmodule TaskTrackerWeb.TaskController do
   alias TaskTracker.Tasks
   alias TaskTracker.Tasks.Task
   alias TaskTracker.AssignedTasks
+  alias TaskTracker.Users
 
   def index(conn, _params) do
     tasks = Tasks.list_tasks()
@@ -30,10 +31,11 @@ defmodule TaskTrackerWeb.TaskController do
   def show(conn, %{"id" => id}) do
     task = Tasks.get_task!(id)
     user_id = get_session(conn, :user_id)
+    users_list = Enum.map Users.list_users(), fn(user) -> user.email end
     task_cset = AssignedTasks.change_assigned_task(%AssignedTasks.AssignedTask{
       user_id: user_id, task_id: task.id
     })
-    render(conn, "show.html", task: task, task_cset: task_cset)
+    render(conn, "show.html", task: task, task_cset: task_cset, users: users_list)
   end
 
   def edit(conn, %{"id" => id}) do

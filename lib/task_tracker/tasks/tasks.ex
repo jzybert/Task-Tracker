@@ -21,6 +21,11 @@ defmodule TaskTracker.Tasks do
     Repo.all(Task)
   end
 
+  def list_tasks_for_user(user_id) do
+    Repo.all from t in Task,
+      where: t.user_id == ^user_id
+  end
+
   @doc """
   Gets a single task.
 

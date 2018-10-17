@@ -1,6 +1,8 @@
 <div class="row">
   <div class="col-12">
     <h1>Welcome to Task Tracker</h1>
-    <%= link "Register", to: Routes.user_path(@conn, :new) %>
+    <%= if !@current_user do %>
+        <%= link "Register", to: Routes.user_path(@conn, :new) %>
+    <% end %>
   </div>
 </div>

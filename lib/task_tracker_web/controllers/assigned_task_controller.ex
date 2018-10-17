@@ -4,6 +4,7 @@ defmodule TaskTrackerWeb.AssignedTaskController do
   alias TaskTracker.Repo
   alias TaskTracker.AssignedTasks
   alias TaskTracker.AssignedTasks.AssignedTask
+  alias TaskTracker.Users
 
   def index(conn, _params) do
     assigned_tasks = AssignedTasks.list_assigned_tasks()
@@ -16,7 +17,10 @@ defmodule TaskTrackerWeb.AssignedTaskController do
   end
 
   def create(conn, %{"assigned_task" => assigned_task_params}) do
-    case AssignedTasks.create_assigned_task(assigned_task_params) do
+    user_id = Users.get_user_by_email(Map.get(assigned_task_params, "user_id", "")).id
+    assigned_task_params_with_id = assigned_task_params
+    |> Map.put("user_id", user_id)
+    case AssignedTasks.create_assigned_task(assigned_task_params_with_id) do
       {:ok, assigned_task} ->
         conn
         |> put_flash(:info, "Assigned task created successfully.")
