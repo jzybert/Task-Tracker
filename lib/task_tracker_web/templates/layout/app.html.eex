@@ -55,7 +55,20 @@
         </div>
       </div>
 
-      <%= render @view_module, @view_template, assigns %>
+      <div class="row">
+        <div class="col-7">
+          <%= render @view_module, @view_template, assigns %>
+        </div>
+
+        <div class="col-5">
+          <%= if @current_user do %>
+            <%= render TaskTrackerWeb.AssignedTaskView, "index.html",
+            Map.put(assigns, :assigned_tasks, @current_user.assigned_tasks) %>
+          <% else %>
+            <p><%= link "Register", to: Routes.user_path(@conn, :new) %></p>
+          <% end %>
+        </div>
+      </div>
     </div>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>

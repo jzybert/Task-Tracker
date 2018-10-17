@@ -6,26 +6,20 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :assigned_user %>
-    <%= text_input f, :assigned_user %>
-    <%= error_tag f, :assigned_user %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :title %>
-    <%= text_input f, :title %>
+    <%= label f, "Task Name*" %>
+    <%= text_input f, :title, class: "form-control" %>
     <%= error_tag f, :title %>
   </div>
 
   <div class="form-group">
-    <%= label f, :desc %>
-    <%= textarea f, :desc %>
+    <%= label f, "Description*" %>
+    <%= textarea f, :desc, class: "form-control" %>
     <%= error_tag f, :desc %>
   </div>
 
   <div class="form-group">
     <%= label f, :time_worked %>
-    <%= time_select f, :time_worked %>
+    <%= time_select f, :time_worked, class: "form-control" %>
     <%= error_tag f, :time_worked %>
   </div>
 
@@ -36,6 +30,6 @@
   </div>
 
   <div>
-    <%= submit "Save" %>
+    <%= submit "Save", class: "btn btn-primary"%>
   </div>
 <% end %>

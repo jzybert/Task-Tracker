@@ -1,0 +1,8 @@
+<h1>Show Assigned task</h1>
+
+<ul>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.assigned_task_path(@conn, :edit, @assigned_task) %></span>
+<span><%= link "Back", to: Routes.assigned_task_path(@conn, :index) %></span>
