@@ -16,10 +16,10 @@
       <td><%= user.admin %></td>
 
       <td>
-        <% if @current_user && @current_user.admin do %>
-            <%= link "Edit", to: Routes.user_path(@conn, :edit, user), class: "btn btn-info" %>
+        <%= if @current_user && @current_user.admin do %>
+            <%= link "Edit", to: Routes.user_path(@conn, :edit, user), class: "btn btn-info btn-sm" %>
             <%= link "Delete", to: Routes.user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"],
-                class: "btn btn-danger" %>
+                class: "btn btn-danger btn-sm" %>
         <% end %>
       </td>
     </tr>
