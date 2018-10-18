@@ -7,6 +7,8 @@
 
 Now you can visit [localhost:400](localhost:4000) from your browser.
 
+Note: Login as **admin@jonathanzybert.com** for admin access.
+
 ## Design Choices
 Three databases:
 - Users
