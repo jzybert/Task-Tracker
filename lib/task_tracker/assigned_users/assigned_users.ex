@@ -21,6 +21,12 @@ defmodule TaskTracker.AssignedUsers do
     Repo.all(AssignedUser)
   end
 
+  def list_assigned_tasks_for_user_by_email(email) do
+    Repo.all from t in AssignedUser,
+      where: t.manager_email == ^email,
+      preload: [:user]
+  end
+
   @doc """
   Gets a single assigned_user.
 

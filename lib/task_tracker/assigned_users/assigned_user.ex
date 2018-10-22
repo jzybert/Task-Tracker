@@ -4,6 +4,7 @@ defmodule TaskTracker.AssignedUsers.AssignedUser do
 
 
   schema "assigned_users" do
+    field :manager_email, :string, null: false
     belongs_to :user, TaskTracker.Users.User
 
     timestamps()
@@ -12,7 +13,7 @@ defmodule TaskTracker.AssignedUsers.AssignedUser do
   @doc false
   def changeset(assigned_user, attrs) do
     assigned_user
-    |> cast(attrs, [:user_id])
-    |> validate_required([:user_id])
+    |> cast(attrs, [:manager_email, :user_id])
+    |> validate_required([:manager_email, :user_id])
   end
 end

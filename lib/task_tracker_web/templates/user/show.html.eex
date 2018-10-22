@@ -24,6 +24,37 @@
   </tbody>
 </table>
 
+<h3>Users managed by this user:</h3>
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for user <- @users do %>
+    <tr>
+      <td><%= link user.user.email, to: Routes.user_path(@conn, :show, user.user.id) %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= if @current_user do %>
+  <div>
+    <%= form_for @user_cset, Routes.assigned_user_path(@conn, :create), [class: "form-inline"], fn f -> %>
+
+      <%= hidden_input f, :user_id %>
+      <%= hidden_input f, :manager_email %>
+
+      <div>
+        <%= submit "Manage This User", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
 <% if @current_user && @current_user.admin do %>
   <span><%= link "Edit", to: Routes.user_path(@conn, :edit, @user), class: "btn btn-secondary" %></span>
 <% end %>

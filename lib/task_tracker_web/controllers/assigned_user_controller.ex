@@ -1,6 +1,7 @@
 defmodule TaskTrackerWeb.AssignedUserController do
   use TaskTrackerWeb, :controller
 
+  alias TaskTracker.Users
   alias TaskTracker.AssignedUsers
   alias TaskTracker.AssignedUsers.AssignedUser
 
@@ -19,7 +20,7 @@ defmodule TaskTrackerWeb.AssignedUserController do
       {:ok, assigned_user} ->
         conn
         |> put_flash(:info, "Assigned user created successfully.")
-        |> redirect(to: Routes.assigned_user_path(conn, :show, assigned_user))
+        |> redirect(to: Routes.user_path(conn, :show, assigned_user.user_id))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

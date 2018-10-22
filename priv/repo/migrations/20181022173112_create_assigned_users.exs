@@ -3,6 +3,7 @@ defmodule TaskTracker.Repo.Migrations.CreateAssignedUsers do
 
   def change do
     create table(:assigned_users) do
+      add :manager_email, :string, null: false
       add :user_id, references(:users, on_delete: :delete_all), null: false
 
       timestamps()
