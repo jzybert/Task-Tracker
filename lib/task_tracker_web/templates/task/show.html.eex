@@ -21,7 +21,7 @@
 
 <div style="margin-bottom: 20px"></div>
 
-<%= if @current_user do %>
+<%= if @current_user && @can_assigned_to_anyone do %>
   <div>
     <%= form_for @task_cset, Routes.assigned_task_path(@conn, :create), [class: "form-inline"], fn f -> %>
 

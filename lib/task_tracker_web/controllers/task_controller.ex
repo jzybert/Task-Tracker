@@ -35,10 +35,12 @@ defmodule TaskTrackerWeb.TaskController do
     user_email = Users.get_user(user_id).email
     users_list = AssignedUsers.list_assigned_users_for_user_by_email(user_email)
     users_list = Enum.map users_list, fn(user) -> user.user.email end
+    can_assigned_to_anyone = (length(users_list) > 0)
     task_cset = AssignedTasks.change_assigned_task(%AssignedTasks.AssignedTask{
       user_id: user_id, task_id: task.id
     })
-    render(conn, "show.html", task: task, task_cset: task_cset, users: users_list, is_task_assigned_to_user: true)
+    render(conn, "show.html", task: task, task_cset: task_cset,
+      users: users_list, is_task_assigned_to_user: true, can_assigned_to_anyone: can_assigned_to_anyone)
   end
 
   def edit(conn, %{"id" => id}) do
