@@ -1,24 +1,23 @@
-<h1>Listing Assigned users</h1>
+<h1>Your Assigned Users</h1>
 
-<table>
-  <thead>
+<table class="table table-striped">
+  <thead class="thead-light">
     <tr>
-
+      <th>Email</th>
+      <th>Time Worked</th>
+      <th>Complete?</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for assigned_user <- @assigned_users do %>
     <tr>
-
+      <td><%= link assigned_user.user.email, to: Routes.task_path(@conn, :show, assigned_user.user) %></td>
       <td>
-        <%= link "Show", to: Routes.assigned_user_path(@conn, :show, assigned_user) %>
-        <%= link "Edit", to: Routes.assigned_user_path(@conn, :edit, assigned_user) %>
-        <%= link "Delete", to: Routes.assigned_user_path(@conn, :delete, assigned_user), method: :delete, data: [confirm: "Are you sure?"] %>
+        <%= link "Unassign", to: Routes.assigned_user_path(@conn, :delete, assigned_user),
+            method: :delete, data: [confirm: "Are you sure you want to unassign?"], class: "btn btn-danger btn-sm" %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Assigned user", to: Routes.assigned_user_path(@conn, :new) %></span>

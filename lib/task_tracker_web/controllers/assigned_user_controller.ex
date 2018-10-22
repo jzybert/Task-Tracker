@@ -58,6 +58,6 @@ defmodule TaskTrackerWeb.AssignedUserController do
 
     conn
     |> put_flash(:info, "Assigned user deleted successfully.")
-    |> redirect(to: Routes.assigned_user_path(conn, :index))
+    |> redirect(to: Routes.user_path(conn, :index))
   end
 end
