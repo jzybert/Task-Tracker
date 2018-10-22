@@ -5,7 +5,7 @@
 - Install Node.js dependencies with cd assets && npm install
 - Start Phoenix endpoint with mix phx.server
 
-Now you can visit [localhost:400](localhost:4000) from your browser.
+Now you can visit [localhost:4000](localhost:4000) from your browser.
 
 Note: Login as **admin@jonathanzybert.com** for admin access.
 
