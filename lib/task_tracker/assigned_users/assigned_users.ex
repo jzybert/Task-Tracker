@@ -23,11 +23,21 @@ defmodule TaskTracker.AssignedUsers do
   end
 
   @doc """
-  Returns the list of assigned users for a manager emial.
+  Returns the list of assigned users for a manager email.
+
   """
   def list_assigned_users_for_user_by_email(email) do
     Repo.all from u in AssignedUser,
       where: u.manager_email == ^email,
+      preload: [:user]
+  end
+
+  @doc """
+  Returns the list of assigned users for a given id.
+  """
+  def list_assigned_users_for_user(id) do
+    Repo.all from u in AssignedUser,
+      where: u.user_id == ^id,
       preload: [:user]
   end
 

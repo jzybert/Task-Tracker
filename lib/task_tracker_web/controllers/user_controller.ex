@@ -37,7 +37,14 @@ defmodule TaskTrackerWeb.UserController do
     user_cset = AssignedUsers.change_assigned_user(%AssignedUsers.AssignedUser{
       user_id: id, manager_email: Users.get_user(user_id).email
     })
-    render(conn, "show.html", user: user, tasks: tasks_for_user, user_cset: user_cset, users: assigned_users)
+    manager_list = AssignedUsers.list_assigned_users_for_user(id)
+    if length(manager_list) == 0 do
+      render(conn, "show.html", user: user, tasks: tasks_for_user,
+        user_cset: user_cset, users: assigned_users, manager: "N/A")
+    else
+      render(conn, "show.html", user: user, tasks: tasks_for_user,
+        user_cset: user_cset, users: assigned_users, manager: (hd manager_list).manager_email)
+    end
   end
 
   def edit(conn, %{"id" => id}) do

@@ -4,6 +4,8 @@
   <h3>Non-Admin: <%= @user.email %></h3>
 <% end %>
 
+<h4>Managed by: <%= @manager %></h4>
+
 <h3>This user's tasks:</h3>
 <table class="table table-striped">
   <thead class="thead-light">
