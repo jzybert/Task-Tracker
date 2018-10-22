@@ -10,6 +10,7 @@ defmodule TaskTracker.Tasks.Task do
     field :title, :string
 
     has_many :assigned_tasks, TaskTracker.AssignedTasks.AssignedTask
+    has_many :time_blocks, TaskTracker.TimeBlocks.TimeBlock
 
     timestamps()
   end
