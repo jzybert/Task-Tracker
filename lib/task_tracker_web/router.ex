@@ -21,6 +21,7 @@ defmodule TaskTrackerWeb.Router do
     resources "/tasks", TaskController
     resources "/users", UserController
     resources "/assigned_tasks", AssignedTaskController
+    resources "/assigned_users", AssignedUserController
     resources "/sessions", SessionController, only: [:create, :delete], singleton: true
   end
 

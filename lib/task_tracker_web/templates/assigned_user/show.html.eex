@@ -1,0 +1,8 @@
+<h1>Show Assigned user</h1>
+
+<ul>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.assigned_user_path(@conn, :edit, @assigned_user) %></span>
+<span><%= link "Back", to: Routes.assigned_user_path(@conn, :index) %></span>

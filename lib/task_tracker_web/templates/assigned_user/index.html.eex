@@ -1,0 +1,24 @@
+<h1>Listing Assigned users</h1>
+
+<table>
+  <thead>
+    <tr>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for assigned_user <- @assigned_users do %>
+    <tr>
+
+      <td>
+        <%= link "Show", to: Routes.assigned_user_path(@conn, :show, assigned_user) %>
+        <%= link "Edit", to: Routes.assigned_user_path(@conn, :edit, assigned_user) %>
+        <%= link "Delete", to: Routes.assigned_user_path(@conn, :delete, assigned_user), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Assigned user", to: Routes.assigned_user_path(@conn, :new) %></span>
