@@ -37,13 +37,16 @@ defmodule TaskTrackerWeb.UserController do
     user_cset = AssignedUsers.change_assigned_user(%AssignedUsers.AssignedUser{
       user_id: id, manager_email: Users.get_user(user_id).email
     })
+    reporter_tasks = Enum.map(assigned_users,
+      fn user -> %{:email => user.user.email, :tasks => AssignedTasks.list_assigned_tasks_for_user(user.user_id)} end)
     manager_list = AssignedUsers.list_assigned_users_for_user(id)
     if length(manager_list) == 0 do
       render(conn, "show.html", user: user, tasks: tasks_for_user,
-        user_cset: user_cset, users: assigned_users, manager: "N/A")
+        user_cset: user_cset, users: assigned_users, manager: "N/A", reporter_tasks: reporter_tasks)
     else
       render(conn, "show.html", user: user, tasks: tasks_for_user,
-        user_cset: user_cset, users: assigned_users, manager: (hd manager_list).manager_email)
+        user_cset: user_cset, users: assigned_users, manager: (hd manager_list).manager_email,
+        reporter_tasks: reporter_tasks)
     end
   end
 

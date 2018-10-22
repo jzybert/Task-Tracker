@@ -47,6 +47,28 @@
   </tbody>
 </table>
 
+<h3>Direct Employee Task Report</h3>
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Task Name</th>
+      <th>Assignee</th>
+      <th>Complete?</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for reporter_task <- @reporter_tasks do %>
+  <%= for task <- reporter_task.tasks do %>
+    <tr>
+      <td><%= link task.task.title, to: Routes.task_path(@conn, :show, task.task) %></td>
+      <td><%= reporter_task.email %></td>
+      <td><%= task.task.is_complete %></td>
+    </tr>
+  <% end %>
+<% end %>
+  </tbody>
+</table>
+
 <%= if @current_user && @current_user.id != @user.id do %>
   <div>
     <%= form_for @user_cset, Routes.assigned_user_path(@conn, :create), [class: "form-inline"], fn f -> %>
