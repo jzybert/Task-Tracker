@@ -33,7 +33,7 @@ defmodule TaskTrackerWeb.UserController do
     user = Users.get_user!(id)
     user_id = get_session(conn, :user_id)
     tasks_for_user = AssignedTasks.list_assigned_tasks_for_user(id)
-    assigned_users = AssignedUsers.list_assigned_tasks_for_user_by_email(user.email)
+    assigned_users = AssignedUsers.list_assigned_users_for_user_by_email(user.email)
     user_cset = AssignedUsers.change_assigned_user(%AssignedUsers.AssignedUser{
       user_id: id, manager_email: Users.get_user(user_id).email
     })

@@ -17,13 +17,17 @@ defmodule TaskTracker.AssignedUsers do
       [%AssignedUser{}, ...]
 
   """
-  def list_assigned_users do
-    Repo.all(AssignedUser)
+  def list_assigned_users() do
+    Repo.all from u in AssignedUser,
+      preload: [:user]
   end
 
-  def list_assigned_tasks_for_user_by_email(email) do
-    Repo.all from t in AssignedUser,
-      where: t.manager_email == ^email,
+  @doc """
+  Returns the list of assigned users for a manager emial.
+  """
+  def list_assigned_users_for_user_by_email(email) do
+    Repo.all from u in AssignedUser,
+      where: u.manager_email == ^email,
       preload: [:user]
   end
 

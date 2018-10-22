@@ -45,7 +45,7 @@
   </tbody>
 </table>
 
-<%= if @current_user do %>
+<%= if @current_user && @current_user.id != @user.id do %>
   <div>
     <%= form_for @user_cset, Routes.assigned_user_path(@conn, :create), [class: "form-inline"], fn f -> %>
 
