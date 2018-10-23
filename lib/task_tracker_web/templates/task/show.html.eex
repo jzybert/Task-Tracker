@@ -21,23 +21,6 @@
 
 <div style="margin-bottom: 20px"></div>
 
-<h4>Add time worked to this task:</h4>
-<h6>(YYYY-MM-DD HH:MM:SS, YYYY-MM-DD HH:MM:SS); ...</h6>
-<div style="margin-bottom: 10px">
-    <%= if @is_task_assigned_to_user do %>
-      <div>
-        <textarea class="form-control" id="add-time-text-area"></textarea>
-
-        <button id="add-time-button"
-                data-task-id="<%= @task.id %>"
-                class="btn btn-secondary"
-                style="margin-top: 10px">Add Time</button>
-      </div>
-    <% else %>
-      Cannot edit a task's time if you're not assigned to it
-    <% end %>
-  </div>
-
 <%= if @current_user && @can_assigned_to_anyone do %>
   <div>
     <%= form_for @task_cset, Routes.assigned_task_path(@conn, :create), [class: "form-inline"], fn f -> %>

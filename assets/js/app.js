@@ -70,5 +70,7 @@ $(() => {
         }
       });
     }
+
+    $('#task-edit-save-button').click();
   });
 });

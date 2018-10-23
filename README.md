@@ -21,6 +21,11 @@ Three databases:
   - Keeps track of tasks assigned to users
   - Fields: user_id, task_id
 
+Adding time worked to tasks:
+In order to ensure that the time worked is properly displayed, I made
+the choice that when a user clicks on "Add Time", the "Save" button will
+automatically be clicked such that the displayed time will update.
+
 Style:
 
 Assigned tasks to the current user will always display on the right-hand side

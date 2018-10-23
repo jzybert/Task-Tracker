@@ -25,7 +25,48 @@
     <%= error_tag f, :is_complete %>
   </div>
 
+<h4>Add time worked to this task:</h4>
+<h6>(YYYY-MM-DD HH:MM:SS, YYYY-MM-DD HH:MM:SS); ...</h6>
+<div style="margin-bottom: 10px">
+    <%= if @is_task_assigned_to_user do %>
+      <div>
+        <textarea class="form-control" id="add-time-text-area"></textarea>
+
+        <button id="add-time-button"
+                data-task-id="<%= @task.id %>"
+                class="btn btn-secondary"
+                style="margin-top: 10px">Add Time</button>
+      </div>
+    <% else %>
+      Cannot edit a task's time if you're not assigned to it
+    <% end %>
+</div>
+<div class="form-group">
+    <h4>Time Worked</h4>
+    <table class="table table-striped">
+      <thead class="thead-light">
+        <tr>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+<%= for time_block <- @time_blocks do %>
+        <tr>
+          <td><%= time_block.start_time %></td>
+          <td><%= time_block.end_time %></td>
+          <td>
+            <%= link "Delete", to: Routes.time_block_path(@conn, :delete, time_block.id),
+                method: :delete, data: [confirm: "Are you sure you want to delete"], class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+<% end %>
+      </tbody>
+    </table>
+</div>
+
   <div>
-    <%= submit "Save", class: "btn btn-primary"%>
+    <%= submit "Save", class: "btn btn-primary", id: "task-edit-save-button" %>
   </div>
 <% end %>

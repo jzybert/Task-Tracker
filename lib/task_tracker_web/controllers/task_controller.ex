@@ -32,6 +32,7 @@ defmodule TaskTrackerWeb.TaskController do
 
   def show(conn, %{"id" => id}) do
     task = Tasks.get_task!(id)
+    time_blocks = TimeBlocks.list_time_blocks_for_task_id(task.id)
     user_id = get_session(conn, :user_id)
     user_email = Users.get_user(user_id).email
     users_list = AssignedUsers.list_assigned_users_for_user_by_email(user_email)
@@ -41,16 +42,18 @@ defmodule TaskTrackerWeb.TaskController do
       user_id: user_id, task_id: task.id
     })
     render(conn, "show.html", task: task, task_cset: task_cset,
-      users: users_list, is_task_assigned_to_user: true, can_assigned_to_anyone: can_assigned_to_anyone)
+      users: users_list, is_task_assigned_to_user: true, can_assigned_to_anyone: can_assigned_to_anyone, time_blocks: time_blocks)
   end
 
   def edit(conn, %{"id" => id}) do
     task = Tasks.get_task!(id)
+    time_blocks = TimeBlocks.list_time_blocks_for_task_id(task.id)
     user_id = get_session(conn, :user_id)
     assigned_task_ids = Enum.map AssignedTasks.list_assigned_tasks_for_user(user_id), fn(t) -> t.task.id end
     is_task_assigned_to_user = task.id in assigned_task_ids
     changeset = Tasks.change_task(task)
-    render(conn, "edit.html", task: task, changeset: changeset, is_task_assigned_to_user: is_task_assigned_to_user)
+    render(conn, "edit.html", task: task, changeset: changeset, is_task_assigned_to_user: is_task_assigned_to_user,
+      time_blocks: time_blocks)
   end
 
   def update(conn, %{"id" => id, "task" => task_params}) do
