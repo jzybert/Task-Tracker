@@ -14,8 +14,6 @@ defmodule TaskTrackerWeb.Router do
     plug :accepts, ["json"]
     plug :fetch_session
     plug :fetch_flash
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
     plug TaskTrackerWeb.Plugs.FetchSession
   end
 

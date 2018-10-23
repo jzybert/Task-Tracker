@@ -21,6 +21,11 @@ defmodule TaskTracker.TimeBlocks do
     Repo.all(TimeBlock)
   end
 
+  def list_time_blocks_for_task_id(id) do
+    Repo.all from tb in TimeBlock,
+      where: tb.task_id == ^id
+  end
+
   @doc """
   Gets a single time_block.
 
