@@ -25,6 +25,16 @@
     <%= error_tag f, :is_complete %>
   </div>
 
+<p>Start working on this task <i>(Note: This only works in minute increments and you cannot leave this page.)</i>:</p>
+<button type="button"
+        id="start-working-button"
+        class="btn btn-secondary">Start Working</button>
+<button type="button"
+        id="stop-working-button"
+        class="btn btn-secondary" style="display: none;"
+        data-task-id="<%= @task.id %>">Stop Working</button>
+
+<div style="margin-bottom: 15px;"></div>
 <h4>Add time worked to this task:</h4>
 <h6>(YYYY-MM-DD HH:MM:SS, YYYY-MM-DD HH:MM:SS); ...</h6>
 <div style="margin-bottom: 10px">

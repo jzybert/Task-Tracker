@@ -8,7 +8,7 @@
   </li>
 
   <li class="list-group-item">
-    <strong>Time worked:</strong>
+    <strong>Time worked (hh:mm):</strong>
     <%= @task.time_worked %>
   </li>
 

@@ -73,4 +73,47 @@ $(() => {
 
     $('#task-edit-save-button').click();
   });
+
+  $('#start-working-button').click(event => {
+    window.startTime = new Date(Date.now());
+    $('#stop-working-button').css("display", "block");
+    $('#start-working-button').css("display", "none");
+  });
+
+  $('#stop-working-button').click(event => {
+    $('#stop-working-button').css("display", "none");
+    $('#start-working-button').css("display", "block");
+
+    function datetimeConverter(dt) {
+      return {
+        "year": dt.getFullYear(),
+        "month": dt.getMonth(),
+        "day": dt.getDate(),
+        "hour": dt.getHours(),
+        "minute": dt.getMinutes(),
+        "second": dt.getSeconds()
+      }
+    }
+
+    let taskID = $(event.target).data('task-id');
+
+    let text = JSON.stringify({
+      time_block: {
+        task_id: taskID,
+        start_time: datetimeConverter(window.startTime),
+        end_time: datetimeConverter(new Date(Date.now()))
+      }
+    });
+
+    $.ajax('/ajax/time_blocks', {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: text,
+      success: response => {
+        console.log(response);
+      }
+    });
+    $('#task-edit-save-button').click();
+  });
 });
