@@ -12,4 +12,6 @@
 alias TaskTracker.Users.User
 alias TaskTracker.Tasks.Task
 TaskTracker.Repo.insert!(%User{email: "admin@jonathanzybert.com", admin: true})
+TaskTracker.Repo.insert!(%User{email: "nonadmin@jonathanzybert.com", admin: false})
 TaskTracker.Repo.insert!(%Task{title: "Task 1", desc: "Description"})
+TaskTracker.Repo.insert!(%Task{title: "Task 2", desc: "Description"})
