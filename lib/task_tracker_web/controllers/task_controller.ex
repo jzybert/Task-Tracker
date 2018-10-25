@@ -20,6 +20,7 @@ defmodule TaskTrackerWeb.TaskController do
   end
 
   def create(conn, %{"task" => task_params}) do
+    task_params = Map.put(task_params, "time_worked", %{"hour" => "0", "minute" => "0"})
     case Tasks.create_task(task_params) do
       {:ok, task} ->
         conn
@@ -27,7 +28,7 @@ defmodule TaskTrackerWeb.TaskController do
         |> redirect(to: Routes.task_path(conn, :show, task))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, task: %{id: -1}, is_task_assigned_to_user: true, time_blocks: [])
     end
   end
 
