@@ -15,7 +15,8 @@ defmodule TaskTrackerWeb.TaskController do
 
   def new(conn, _params) do
     changeset = Tasks.change_task(%Task{})
-    render(conn, "new.html", changeset: changeset, is_task_assigned_to_user: true)
+    render(conn, "new.html", changeset: changeset, is_task_assigned_to_user: true,
+      task: %{id: -1}, time_blocks: [])
   end
 
   def create(conn, %{"task" => task_params}) do
@@ -43,7 +44,7 @@ defmodule TaskTrackerWeb.TaskController do
     task_cset = AssignedTasks.change_assigned_task(%AssignedTasks.AssignedTask{
       user_id: user_id, task_id: task.id
     })
-    task = Map.put(task, :time_worked, String.slice(Time.to_string(task.time_worked), 0, 5))
+    task = if task.time_worked !== nil, do: Map.put(task, :time_worked, String.slice(Time.to_string(task.time_worked), 0, 5)), else: task
     render(conn, "show.html", task: task, task_cset: task_cset,
       users: users_list, is_task_assigned_to_user: true, can_assigned_to_anyone: can_assigned_to_anyone, time_blocks: time_blocks)
   end
